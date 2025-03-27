@@ -1,0 +1,40 @@
+/*
+https://platform.stratascratch.com/coding/2002-submission-types?code_type=1
+
+Difficulty: Easy
+
+Write a query that returns the user ID of all users that have created at least one ‘Refinance’ submission and at least one ‘InSchool’ submission.
+
+Table: loans
+
+created_at:date
+id:bigint
+status:text
+type:text
+user_id:bigint
+
+Preview
+id	user_id	created_at	    status	                type
+1	100	    2017-04-21	prequal_completd_offer	Refinance
+2	100	    2017-04-27	offer_accepted	        Refinance
+3	101	    2017-04-22	prequal_completd_no_offer	Refinance
+4	101	    2017-04-23	offer_accepted	        Refinance
+5	101	    2017-04-25	offer_accepted	        Personal
+6	102	    2017-04-27	offer_accepted	        InSchool
+7	107	    2017-04-27	prequal_response_received	Personal
+8	108	    2017-04-21	form_in_progress	    Refinance
+9	108	    2017-04-27	offer_accepted	        Refinance
+10	108	    2017-04-27	prequal_response_received	InSchool
+11	100	    2015-04-21	prequal_completd_offer	Refinance
+
+SELECT distinct l1.user_id, l1.type,l2.type
+FROM loans l1
+JOIN loans l2
+on l1.user_id=l2.user_id
+WHERE l1.type='Refinance' AND l2.type='InSchool';*/
+
+SELECT distinct l1.user_id
+FROM loans l1
+JOIN loans l2
+on l1.user_id=l2.user_id
+WHERE l1.type='Refinance' AND l2.type='InSchool';
