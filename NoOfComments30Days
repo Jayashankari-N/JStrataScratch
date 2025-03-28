@@ -1,0 +1,30 @@
+/* Number of Comments Per User in 30 days before 2020-02-10
+Return the total number of comments received for each user in the 30 or less days before 2020-02-10. Don't output users who haven't received any comment in the defined time period.
+Table: fb_comments_count
+user_id	created_at	number_of_comments
+18	2019-12-29	1
+25	2019-12-21	1
+78	2020-01-04	1
+37	2020-02-01	1
+created_at: date
+number_of_comments: bigint
+user_id: bigint
+Output
+Execution time: 0.00734 seconds
+
+user_id	counts
+5	1
+8	4
+9	2
+
+*/
+
+
+
+
+
+select user_id, count(number_of_comments) as counts
+from fb_comments_count
+where created_at between ('2020-02-10':: date - interval '30 DAYS') AND '2020-02-10'
+group by user_id
+having count(number_of_comments)>0;
