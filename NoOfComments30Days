@@ -20,11 +20,15 @@ user_id	counts
 9	2
 
 */
+MYSQL
+select user_id, count(number_of_comments) as counts
+from fb_comments_count
+where created_at between ('2020-02-10' - interval 30 DAY) AND '2020-02-10'
+group by user_id
+having count(number_of_comments)>0;
 
 
-
-
-
+POSTGRES
 select user_id, count(number_of_comments) as counts
 from fb_comments_count
 where created_at between ('2020-02-10':: date - interval '30 DAYS') AND '2020-02-10'
